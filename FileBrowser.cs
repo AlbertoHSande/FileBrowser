@@ -51,6 +51,16 @@ public class FileBrowser : MonoBehaviour {
 			
 		i = 0;
 
+		if (Application.platform == RuntimePlatform.LinuxPlayer | Application.platform == RuntimePlatform.LinuxEditor) {
+			foreach (string s in Directory.GetFiles (path)) {
+				fileList [i++] = s.Remove (0, path.Length + 1);
+			}
+		} else if (Application.platform == RuntimePlatform.WindowsPlayer | Application.platform == RuntimePlatform.WindowsEditor) {
+			foreach (string s in Directory.GetFiles (path)) {
+				fileList [i++] = s.Remove (0, path.Length);
+			}
+		}
+
 		foreach (string s in Directory.GetFiles (path)) {
 			fileList[i++] = s.Remove (0, path.Length+1);
 		}
